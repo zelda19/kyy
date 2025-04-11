@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Birthday Card</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #03335c;
+            margin: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        .card {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            perspective: 1500px;
+            margin: auto;
+        }
+        
+        .card-front, .card-inside {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 1s;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-front {
+            background: linear-gradient(to bottom, #ff7eb9, #ff65a3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-origin: left;
+            z-index: 2;
+        }
+        
+        .card-inside {
+        background: white;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+        transform-origin: left;
+        z-index: 1;
+
+        }
+
+        .card.open .card-front {
+            transform: rotateY(-180deg);
+        }
+        
+        .front-text {
+            font-size: 24px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cake {
+            position: relative;
+            width: 140px;
+            height: 120px;
+            margin-bottom: 20px;
+        }
+        
+        .cake-base {
+            position: absolute;
+            bottom: 0;
+            width: 140px;
+            height: 60px;
+            background: #f9c75a;
+            border-radius: 10px 10px 5px 5px;
+        }
+        
+        .cake-middle {
+            position: absolute;
+            bottom: 60px;
+            width: 120px;
+            height: 40px;
+            left: 10px;
+            background: #f16c6c;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .cake-top {
+            position: absolute;
+            bottom: 100px;
+            width: 100px;
+            height: 20px;
+            left: 20px;
+            background: #a2d5f2;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .candle {
+            position: absolute;
+            bottom: 120px;
+            left: 65px;
+            width: 10px;
+            height: 30px;
+            background: #ffffff;
+            border-radius: 2px;
+            z-index: 1;
+        }
+        
+        .flame {
+            position: absolute;
+            bottom: 150px;
+            left: 65px;
+            width: 10px;
+            height: 15px;
+            background: #ffdd1f;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 10px #ff9900, 0 0 20px #ff9900;
+            transform-origin: center bottom;
+            animation: flicker 0.5s infinite alternate;
+        }
+        
+        .icing {
+            position: absolute;
+            background: white;
+            border-radius: 10px;
+        }
+        
+        .icing-1 {
+            bottom: 60px;
+            width: 10px;
+            height: 15px;
+            left: 20px;
+        }
+        
+        .icing-2 {
+            bottom: 60px;
+            width: 10px;
+            height: 15px;
+            left: 40px;
+        }
+        
+        .icing-3 {
+            bottom: 60px;
+            width: 10px;
+            height: 15px;
+            left: 60px;
+        }
+        
+        .icing-4 {
+            bottom: 60px;
+            width: 10px;
+            height: 15px;
+            left: 80px;
+        }
+        
+        .icing-5 {
+            bottom: 60px;
+            width: 10px;
+            height: 15px;
+            left: 100px;
+        }
+        
+        .icing-6 {
+            bottom: 60px;
+            width: 10px;
+            height: 15px;
+            left: 120px;
+        }
+        
+        .message {
+            font-size: 28px;
+            color: #ff65a3;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .subtext {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+        }
+        
+        @keyframes flicker {
+            0% { transform: scale(1.0); box-shadow: 0 0 10px #ff9900, 0 0 20px #ff9900; }
+            100% { transform: scale(1.05, 1.15); box-shadow: 0 0 15px #ff9900, 0 0 25px #ff9900; }
+        }
+        
+        .instructions {
+            position: absolute;
+            bottom: 20px;
+            font-size: 14px;
+            color: #555;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-front" id="card-front">
+            <div class="front-text">Click to Open!</div>
+        </div>
+
+
+        <div class="card-inside">
+            <div class="message">Happy Birthday!</div>
+            <div class="cake">
+                <div class="cake-base"></div>
+                <div class="cake-middle"></div>
+                <div class="cake-top"></div>
+                <div class="candle"></div>
+                <div class="flame"></div>
+                <div class="icing icing-1"></div>
+                <div class="icing icing-2"></div>
+                <div class="icing icing-3"></div>
+                <div class="icing icing-4"></div>
+                <div class="icing icing-5"></div>
+                <div class="icing icing-6"></div>
+            </div>
+            <div class="subtext"> happyy birthdayyyy kyyy:P </div>
+        </div>
+        
+    <div class="instructions">Click anywhere to open/close the card</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const card = document.querySelector('.card');
+            const body = document.querySelector('body');
+            
+            body.addEventListener('click', function() {
+                card.classList.toggle('open');
+                
+                if (card.classList.contains('open')) {
+                    createConfetti();
+                }
+            });
+            
+            function createConfetti() {
+                const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722'];
+                
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.top = -10 + 'px';
+                    confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                    body.appendChild(confetti);
+                    
+                    // Animate confetti
+                    const animation = confetti.animate(
+                        [
+                            { 
+                                transform: 'translateY(0) rotate(0deg)', 
+                                opacity: 1 
+                            },
+                            { 
+                                transform: 'translateY(' + (Math.random() * 500 + 200) + 'px) rotate(' + (Math.random() * 360) + 'deg)', 
+                                opacity: 0 
+                            }
+                        ], 
+                        {
+                            duration: Math.random() * 3000 + 2000,
+                            easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)',
+                            delay: Math.random() * 500
+                        }
+                    );
+                    
+                    animation.onfinish = function() {
+                        confetti.remove();
+                    };
+                }
+            }
+        });
+    </script>
+</body>
+</html>
